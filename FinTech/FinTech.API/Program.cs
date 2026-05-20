@@ -28,9 +28,23 @@ builder.Services.AddScoped<ILoanService, LoanService>();
 
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
+
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
+app.UseCors("AllowFrontend");
 
 using (var scope = app.Services.CreateScope())
 {
@@ -47,15 +61,6 @@ using (var scope = app.Services.CreateScope())
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
-builder.Services.AddSwaggerGen();
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-
-    app.UseSwaggerUI();
-}
 
 app.UseHttpsRedirection();
 

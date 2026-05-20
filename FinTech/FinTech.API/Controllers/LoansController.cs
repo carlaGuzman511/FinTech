@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinTech.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class LoansController : ControllerBase
     {
         private readonly ILoanService _service;

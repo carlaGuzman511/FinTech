@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinTech.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class TransactionsController : ControllerBase
     {
         private readonly ITransactionService _service;
@@ -20,8 +20,7 @@ namespace FinTech.API.Controllers
         public async Task<IActionResult> Create(
             CreateTransactionDto request)
         {
-            var result =
-                await _service.CreateTransactionAsync(request);
+            var result = await _service.CreateTransactionAsync(request);
 
             return Ok(result);
         }
