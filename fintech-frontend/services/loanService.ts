@@ -20,6 +20,15 @@ export const getLoanById =
     return response.data;
   };
 
+export const getLoanSchedule =
+  async (id: string) => {
+    const response = await api.get(
+      `/loans/${id}/schedule`
+    );
+
+    return response.data;
+  };
+
 export const simulateLoan =
   async (data: any) => {
     const response =

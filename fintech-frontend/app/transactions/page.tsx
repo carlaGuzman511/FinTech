@@ -1,26 +1,27 @@
 "use client";
 
-import { useState }
-  from "react";
+import { useState } from "react";
 
-import { useQuery }
-  from "@tanstack/react-query";
-
-import Card
-  from "@/components/ui/Card";
-
-import Badge
-  from "@/components/ui/Badge";
-
-import EmptyState
-  from "@/components/ui/EmptyState";
+import Link from "next/link";
 
 import {
-  getTransactions,
-} from "@/services/transactionService";
+  useTransactions,
+} from "@/hooks/useTransactions";
 
-export default function
-TransactionsPage() {
+import Card from
+  "@/components/ui/Card";
+
+import EmptyState from
+  "@/components/ui/EmptyState";
+
+import {
+  TransactionType,
+  TransactionTypeLabel,
+  TransactionStatus,
+  TransactionStatusLabel,
+} from "@/types/transaction";
+
+export default function TransactionsPage() {
   const [type, setType] =
     useState("");
 
@@ -30,44 +31,55 @@ TransactionsPage() {
   const {
     data,
     isLoading,
-  } = useQuery({
-    queryKey: [
-      "transactions",
-      type,
-      status,
-    ],
+  } = useTransactions({
+    type:
+      type !== ""
+        ? Number(type)
+        : undefined,
 
-    queryFn: () =>
-      getTransactions(
-        type,
-        status
-      ),
+    status:
+      status !== ""
+        ? Number(status)
+        : undefined,
   });
 
   if (isLoading) {
-    return (
-      <div>
-        Loading transactions...
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   return (
     <main className="space-y-6">
-      <div>
+      <div
+        className="
+          flex
+          justify-between
+          items-center
+        "
+      >
         <h1 className="text-3xl font-bold">
           Transactions
         </h1>
+
+        <Link
+          href="/transactions/new"
+          className="
+            bg-black
+            text-white
+            px-4
+            py-2
+            rounded
+          "
+        >
+          New Transaction
+        </Link>
       </div>
 
       <Card>
-        <div className="flex gap-4">
+        <div className="grid md:grid-cols-2 gap-4">
           <select
             value={type}
             onChange={(e) =>
-              setType(
-                e.target.value
-              )
+              setType(e.target.value)
             }
             className="
               border
@@ -80,20 +92,18 @@ TransactionsPage() {
             </option>
 
             <option value="0">
-              Disbursement
+              Payment
             </option>
 
             <option value="1">
-              Payment
+              Disbursement
             </option>
           </select>
 
           <select
             value={status}
             onChange={(e) =>
-              setStatus(
-                e.target.value
-              )
+              setStatus(e.target.value)
             }
             className="
               border
@@ -130,9 +140,7 @@ TransactionsPage() {
         {data?.map(
           (transaction: any) => (
             <Card
-              key={
-                transaction.id
-              }
+              key={transaction.id}
             >
               <div
                 className="
@@ -151,16 +159,35 @@ TransactionsPage() {
 
                   <p>
                     {
-                      transaction.type
+                      TransactionTypeLabel[
+                        transaction.type as TransactionType
+                      ]
+                    }
+                  </p>
+
+                  <p>
+                    {
+                      TransactionStatusLabel[
+                        transaction.status as TransactionStatus
+                      ]
+                    }
+                  </p>
+
+                  <p className="text-sm text-gray-500">
+                    Loan:
+                    {" "}
+                    {
+                      transaction.loanId
                     }
                   </p>
                 </div>
 
-                <Badge
-                  status={
-                    transaction.status
-                  }
-                />
+                <Link
+                  href={`/transactions/${transaction.id}`}
+                  className="underline"
+                >
+                  Detail
+                </Link>
               </div>
             </Card>
           )

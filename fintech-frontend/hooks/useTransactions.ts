@@ -1,15 +1,25 @@
+"use client";
+
+import { useQuery } from
+  "@tanstack/react-query";
+
+import {
+  getTransactions,
+} from "@/services/transactionService";
+
 export function useTransactions(
-  type?: string,
-  status?: string
+  filters?: {
+    type?: number;
+    status?: number;
+  }
 ) {
   return useQuery({
     queryKey: [
       "transactions",
-      type,
-      status,
+      filters,
     ],
 
     queryFn: () =>
-      getTransactions(type, status),
+      getTransactions(filters),
   });
 }

@@ -74,10 +74,14 @@ export default function LoanSimulator() {
         });
       },
 
-      onError: () => {
-        toast.error(
-          "Loan creation failed"
-        );
+      onError: (error: any) => {
+        const message =
+          error?.response?.data?.message ||
+          error?.response?.data ||
+          error?.message ||
+          "Loan Creation failed";
+
+        toast.error(message);
       },
     });
 
@@ -104,7 +108,7 @@ export default function LoanSimulator() {
     const values = getValues();
 
     createLoanMutation.mutate({
-      userId: "user-123",
+      userId: String(values.userId),
 
       amount:
         Number(values.amount),
@@ -130,6 +134,29 @@ export default function LoanSimulator() {
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-4"
         >
+          <div>
+            <label className="block mb-1">
+              User Id
+            </label>
+
+            <input
+              type="string"
+              className="
+                border
+                p-2
+                rounded
+                w-full
+              "
+              {...register(
+                "userId",
+                {
+                  required: true,
+                }
+              )}
+            />
+
+          </div>
+
           <div>
             <label className="block mb-1">
               Amount

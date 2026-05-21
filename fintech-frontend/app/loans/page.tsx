@@ -17,6 +17,10 @@ import Card
 import EmptyState
   from "@/components/ui/EmptyState";
 
+  
+import { LoanTypeLabel } from "@/types/loan";
+import { LoanType } from "@/types/loan";
+
 export default function LoansPage() {
   const [userId, setUserId] =
     useState("");
@@ -38,22 +42,6 @@ export default function LoansPage() {
         </h1>
       </div>
 
-      <Card>
-        <input
-          placeholder="Filter by userId"
-          value={userId}
-          onChange={(e) =>
-            setUserId(e.target.value)
-          }
-          className="
-            border
-            p-2
-            rounded
-            w-full
-          "
-        />
-      </Card>
-
       {!data?.length && (
         <EmptyState
           title="No loans found"
@@ -71,6 +59,10 @@ export default function LoansPage() {
               "
             >
               <div>
+                <p>
+                  {loan.userId}
+                </p>
+
                 <h2 className="font-bold">
                   ${loan.amount}
                 </h2>
@@ -82,7 +74,12 @@ export default function LoansPage() {
               </div>
 
               <Badge
-                status={loan.status}
+                status={
+                              LoanTypeLabel[
+                                loan.loanType as LoanType
+                              ] ??
+                              loan.loanType
+                            }
               />
 
               <Link
