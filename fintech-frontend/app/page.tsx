@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import Card from "@/components/ui/Card";
 
-export default function HomePage() {
+export default function Page() {
   return (
     <main className="p-8 space-y-8">
       <div>
