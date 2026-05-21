@@ -13,6 +13,7 @@ import { getLoanById, getLoanSchedule } from "@/services/loanService";
 
 import { LoanStatusLabel, LoanTypeLabel } from "@/types/loan";
 import { LoanStatus, LoanType } from "@/types/loan";
+import { useLoanActions } from "@/hooks/useLoanActions";
 
 export default function LoanDetailPage() {
   const params = useParams();
@@ -39,6 +40,11 @@ export default function LoanDetailPage() {
     enabled: !!id,
   });
   
+  const {
+    approveMutation,
+    rejectMutation,
+  } = useLoanActions(id);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -151,6 +157,25 @@ export default function LoanDetailPage() {
           />
         )}
       </Card>
+      
+      <div className="flex gap-2 mt-4">
+        <button
+          onClick={() => approveMutation.mutate()}
+          disabled={approveMutation.isPending}
+          className="bg-green-600 text-white px-4 py-2 rounded"
+        >
+          Approve
+        </button>
+
+        <button
+          onClick={() => rejectMutation.mutate()}
+          disabled={rejectMutation.isPending}
+          className="bg-red-600 text-white px-4 py-2 rounded"
+        >
+          Reject
+        </button>
+      </div>
+      
     </main>
   );
 }
