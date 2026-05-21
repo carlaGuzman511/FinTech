@@ -1,0 +1,314 @@
+{
+  "info": {
+    "_postman_id": "b7f8b20b-498b-4f06-9063-a66408079dbe",
+    "name": "FinTech",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "11361601",
+    "_collection_link": "https://go.postman.co/collection/11361601-b7f8b20b-498b-4f06-9063-a66408079dbe?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Loans",
+      "item": [
+        {
+          "name": "simulate loan",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"amount\": 10000,\r\n  \"termMonths\": 12,\r\n  \"annualInterestRate\": 0.24,\r\n  \"loanType\": 0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7132/api/v1/loans/simulate",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7132",
+              "path": [
+                "api",
+                "v1",
+                "loans",
+                "simulate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create loan",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-123\",\r\n  \"amount\": 10000,\r\n  \"termMonths\": 12,\r\n  \"annualInterestRate\": 0.24,\r\n  \"loanType\": 0,\r\n  \"monthlyIncome\": 5000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7132/api/v1/loans",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7132",
+              "path": [
+                "api",
+                "v1",
+                "loans"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get loans",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-123\",\r\n  \"amount\": 10000,\r\n  \"termMonths\": 12,\r\n  \"annualInterestRate\": 0.24,\r\n  \"loanType\": 0,\r\n  \"monthlyIncome\": 5000\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7132/api/v1/loans",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7132",
+              "path": [
+                "api",
+                "v1",
+                "loans"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get loans by user id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-123\",\r\n  \"amount\": 10000,\r\n  \"termMonths\": 12,\r\n  \"annualInterestRate\": 0.24,\r\n  \"loanType\": 0,\r\n  \"monthlyIncome\": 5000\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7132/api/v1/loans?user-123",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7132",
+              "path": [
+                "api",
+                "v1",
+                "loans"
+              ],
+              "query": [
+                {
+                  "key": "user-123",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get loan by id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-123\",\r\n  \"amount\": 10000,\r\n  \"termMonths\": 12,\r\n  \"annualInterestRate\": 0.24,\r\n  \"loanType\": 0,\r\n  \"monthlyIncome\": 5000\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7132/api/v1/loans/08feac26-f071-43e5-a683-062d39590f22",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7132",
+              "path": [
+                "api",
+                "v1",
+                "loans",
+                "08feac26-f071-43e5-a683-062d39590f22"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get loan schedules by id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-123\",\r\n  \"amount\": 10000,\r\n  \"termMonths\": 12,\r\n  \"annualInterestRate\": 0.24,\r\n  \"loanType\": 0,\r\n  \"monthlyIncome\": 5000\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7132/api/v1/loans/08feac26-f071-43e5-a683-062d39590f22/schedule",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7132",
+              "path": [
+                "api",
+                "v1",
+                "loans",
+                "08feac26-f071-43e5-a683-062d39590f22",
+                "schedule"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "approve loan by id",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-123\",\r\n  \"amount\": 10000,\r\n  \"termMonths\": 12,\r\n  \"annualInterestRate\": 0.24,\r\n  \"loanType\": 0,\r\n  \"monthlyIncome\": 5000\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7132/api/v1/loans/08feac26-f071-43e5-a683-062d39590f22/approve",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7132",
+              "path": [
+                "api",
+                "v1",
+                "loans",
+                "08feac26-f071-43e5-a683-062d39590f22",
+                "approve"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "reject loan by id",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"user-123\",\r\n  \"amount\": 10000,\r\n  \"termMonths\": 12,\r\n  \"annualInterestRate\": 0.24,\r\n  \"loanType\": 0,\r\n  \"monthlyIncome\": 5000\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7132/api/v1/loans/08feac26-f071-43e5-a683-062d39590f22/reject",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7132",
+              "path": [
+                "api",
+                "v1",
+                "loans",
+                "08feac26-f071-43e5-a683-062d39590f22",
+                "reject"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": []
+    },
+    {
+      "name": "get transactions",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"userId\": \"user-123\",\r\n  \"amount\": 10000,\r\n  \"termMonths\": 12,\r\n  \"annualInterestRate\": 0.24,\r\n  \"loanType\": 0,\r\n  \"monthlyIncome\": 5000\r\n}"
+        },
+        "url": {
+          "raw": "https://localhost:7132/api/v1/transactions",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "7132",
+          "path": [
+            "api",
+            "v1",
+            "transactions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create transaction",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"idempotencyKey\": \"payment-123\",\r\n  \"type\": 1,\r\n  \"amount\": 200,\r\n  \"loanId\": null,\r\n  \"description\": \"Monthly payment\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:7132/api/v1/transactions",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "7132",
+          "path": [
+            "api",
+            "v1",
+            "transactions"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
