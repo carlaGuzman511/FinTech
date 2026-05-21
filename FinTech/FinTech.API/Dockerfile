@@ -16,4 +16,4 @@ RUN ls -R .
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 
-ENTRYPOINT ["dotnet", "FinTech.API.dll"]
+ENTRYPOINT ["dotnet", "/app/FinTech.API.dll"]
