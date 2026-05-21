@@ -1,4 +1,6 @@
 ﻿using FinTech.API.DTOs.Transactions;
+using FinTech.API.Enum;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FinTech.API.Services.Interfaces
 {
@@ -7,7 +9,7 @@ namespace FinTech.API.Services.Interfaces
         Task<TransactionResponseDto> CreateTransactionAsync(
             CreateTransactionDto request);
 
-        Task<List<TransactionResponseDto>> GetTransactionsAsync();
+        Task<List<TransactionResponseDto>> GetTransactionsAsync(TransactionType? type, TransactionStatus? status);
 
         Task<TransactionResponseDto?> GetByIdAsync(Guid id);
     }

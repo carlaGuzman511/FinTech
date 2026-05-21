@@ -1,4 +1,5 @@
 ﻿using FinTech.API.DTOs.Transactions;
+using FinTech.API.Enum;
 using FinTech.API.Models;
 using FinTech.API.Repositories.Interfaces;
 using FinTech.API.Services;
@@ -21,6 +22,42 @@ namespace FinTech.Tests.Services
             _transactionService =
                 new TransactionService(
                     _transactionRepositoryMock.Object);
+        }
+
+
+        [Fact]
+        public async Task ShouldReturnExistingTransaction_WhenIdempotencyKeyExists()
+        {
+            var repository = new Mock<ITransactionRepository>();
+
+            var existing = new Transaction
+            {
+                Id = Guid.NewGuid(),
+                IdempotencyKey = "abc123",
+                Amount = 100,
+                Status = TransactionStatus.Completed
+            };
+
+            repository
+                .Setup(x =>
+                    x.GetByIdempotencyKeyAsync("abc123"))
+                .ReturnsAsync(existing);
+
+            var service = new TransactionService(repository.Object);
+
+            var request = new CreateTransactionDto
+            {
+                IdempotencyKey = "abc123",
+                Amount = 100
+            };
+
+            var result = await service.CreateTransactionAsync(request);
+
+            result.Id.Should().Be(existing.Id);
+
+            repository.Verify(
+                x => x.AddAsync(It.IsAny<Transaction>()),
+                Times.Never);
         }
 
         [Fact]

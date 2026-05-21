@@ -21,9 +21,16 @@ namespace FinTech.API.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Loan>> GetAllAsync()
+        public async Task<List<Loan>> GetFilteredAsync(string? userId)
         {
-            return await _context.Loans
+            var query = _context.Loans.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(userId))
+            {
+                query = query.Where(x => x.UserId == userId);
+            }
+
+            return await query
                 .Include(x => x.PaymentSchedules)
                 .ToListAsync();
         }

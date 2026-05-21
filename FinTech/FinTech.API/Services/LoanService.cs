@@ -22,6 +22,30 @@ namespace FinTech.API.Services
             _transactionRepository = transactionRepository;
         }
 
+        public async Task<List<PaymentScheduleDto>> GetScheduleAsync(Guid loanId)
+        {
+            var loan = await _loanRepository.GetByIdAsync(loanId);
+
+            if (loan == null)
+            {
+                throw new BusinessException(
+                    "Loan not found.");
+            }
+
+            return loan.PaymentSchedules
+                .OrderBy(x => x.PaymentNumber)
+                .Select(x => new PaymentScheduleDto
+                {
+                    PaymentNumber = x.PaymentNumber,
+                    DueDate = x.DueDate,
+                    TotalPayment = x.TotalPayment,
+                    Principal = x.Principal,
+                    Interest = x.Interest,
+                    RemainingBalance = x.RemainingBalance
+                })
+                .ToList();
+        }
+
         public async Task<LoanSimulationResponseDto> SimulateLoanAsync(
             SimulateLoanRequestDto request)
         {
@@ -129,13 +153,12 @@ namespace FinTech.API.Services
             return MapToDto(loan);
         }
 
-        public async Task<List<LoanResponseDto>> GetLoansAsync()
+        public async Task<List<LoanResponseDto>> GetLoansAsync(string? userId)
         {
-            var loans = await _loanRepository.GetAllAsync();
+            var loans = await _loanRepository.GetFilteredAsync(userId);
 
             return loans.Select(MapToDto).ToList();
         }
-
         public async Task<LoanResponseDto?> GetLoanByIdAsync(Guid id)
         {
             var loan = await _loanRepository.GetByIdAsync(id);

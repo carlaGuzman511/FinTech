@@ -1,4 +1,5 @@
-﻿using FinTech.API.Models;
+﻿using FinTech.API.Enum;
+using FinTech.API.Models;
 
 namespace FinTech.API.Repositories.Interfaces
 {
@@ -8,8 +9,8 @@ namespace FinTech.API.Repositories.Interfaces
 
         Task<Transaction?> GetByIdempotencyKeyAsync(string idempotencyKey);
 
-        Task<List<Transaction>> GetAllAsync();
-
         Task AddAsync(Transaction transaction);
+
+        Task<List<Transaction>> GetFilteredAsync(TransactionType? type, TransactionStatus? status);
     }
 }

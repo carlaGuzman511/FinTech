@@ -1,4 +1,5 @@
 ﻿using FinTech.API.DTOs.Transactions;
+using FinTech.API.Enum;
 using FinTech.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,8 +18,7 @@ namespace FinTech.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(
-            CreateTransactionDto request)
+        public async Task<IActionResult> Create(CreateTransactionDto request)
         {
             var result = await _service.CreateTransactionAsync(request);
 
@@ -26,16 +26,15 @@ namespace FinTech.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] TransactionType? type, [FromQuery] TransactionStatus? status)
         {
-            return Ok(await _service.GetTransactionsAsync());
+            return Ok(await _service.GetTransactionsAsync(type, status));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var transaction =
-                await _service.GetByIdAsync(id);
+            var transaction = await _service.GetByIdAsync(id);
 
             if (transaction == null)
             {

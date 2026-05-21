@@ -3,6 +3,7 @@ using FinTech.API.Enum;
 using FinTech.API.Models;
 using FinTech.API.Repositories.Interfaces;
 using FinTech.API.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FinTech.API.Services
 {
@@ -10,19 +11,14 @@ namespace FinTech.API.Services
     {
         private readonly ITransactionRepository _repository;
 
-        public TransactionService(
-            ITransactionRepository repository)
+        public TransactionService(ITransactionRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<TransactionResponseDto>
-            CreateTransactionAsync(
-                CreateTransactionDto request)
+        public async Task<TransactionResponseDto> CreateTransactionAsync(CreateTransactionDto request)
         {
-            var existing =
-                await _repository.GetByIdempotencyKeyAsync(
-                    request.IdempotencyKey);
+            var existing = await _repository.GetByIdempotencyKeyAsync(request.IdempotencyKey);
 
             if (existing != null)
             {
@@ -46,30 +42,25 @@ namespace FinTech.API.Services
             return MapToDto(transaction);
         }
 
-        public async Task<List<TransactionResponseDto>>
-            GetTransactionsAsync()
+        public async Task<List<TransactionResponseDto>>GetTransactionsAsync(TransactionType? type, TransactionStatus? status)
         {
-            var transactions =
-                await _repository.GetAllAsync();
+            var transactions = await _repository.GetFilteredAsync(type, status);
 
             return transactions
                 .Select(MapToDto)
                 .ToList();
         }
 
-        public async Task<TransactionResponseDto?>
-            GetByIdAsync(Guid id)
+        public async Task<TransactionResponseDto?> GetByIdAsync(Guid id)
         {
-            var transaction =
-                await _repository.GetByIdAsync(id);
+            var transaction = await _repository.GetByIdAsync(id);
 
             return transaction == null
                 ? null
                 : MapToDto(transaction);
         }
 
-        private static TransactionResponseDto
-            MapToDto(Transaction transaction)
+        private static TransactionResponseDto MapToDto(Transaction transaction)
         {
             return new TransactionResponseDto
             {

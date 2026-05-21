@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Helpers\" />
     <Folder Include="Fixtures\" />
+    <Folder Include="IntegrationTests\" />
   </ItemGroup>
 
   <ItemGroup>

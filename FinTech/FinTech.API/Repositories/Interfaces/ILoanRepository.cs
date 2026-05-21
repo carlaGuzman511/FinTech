@@ -6,8 +6,6 @@ namespace FinTech.API.Repositories.Interfaces
     {
         Task<Loan?> GetByIdAsync(Guid id);
 
-        Task<List<Loan>> GetAllAsync();
-
         Task<List<Loan>> GetByUserIdAsync(string userId);
 
         Task AddAsync(Loan loan);
@@ -17,5 +15,7 @@ namespace FinTech.API.Repositories.Interfaces
         Task<int> CountActiveLoansAsync(string userId);
 
         Task<decimal> GetTotalMonthlyPaymentsAsync(string userId);
+
+        Task<List<Loan>> GetFilteredAsync(string? userId);
     }
 }

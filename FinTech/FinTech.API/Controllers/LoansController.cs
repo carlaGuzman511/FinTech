@@ -29,17 +29,24 @@ namespace FinTech.API.Controllers
             CreateLoanRequestDto request)
         {
 
-            var result =
-                await _service.CreateLoanAsync(request);
+            var result = await _service.CreateLoanAsync(request);
 
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("{id}/schedule")]
+        public async Task<IActionResult> GetSchedule(Guid id)
         {
-            return Ok(await _service.GetLoansAsync());
+            var result = await _service.GetScheduleAsync(id);
 
+            return Ok(result);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll([FromQuery] string? userId)
+        {
+            return Ok(await _service.GetLoansAsync(userId));
         }
 
         [HttpGet("{id}")]

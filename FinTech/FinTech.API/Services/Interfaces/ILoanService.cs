@@ -10,12 +10,14 @@ namespace FinTech.API.Services.Interfaces
         Task<LoanResponseDto> CreateLoanAsync(
             CreateLoanRequestDto request);
 
-        Task<List<LoanResponseDto>> GetLoansAsync();
+        Task<List<LoanResponseDto>> GetLoansAsync(string? userId);
 
         Task<LoanResponseDto?> GetLoanByIdAsync(Guid id);
 
         Task ApproveLoanAsync(Guid id);
 
         Task RejectLoanAsync(Guid id);
+
+        Task<List<PaymentScheduleDto>> GetScheduleAsync(Guid loanId);
     }
 }

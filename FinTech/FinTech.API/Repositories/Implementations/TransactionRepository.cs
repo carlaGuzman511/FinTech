@@ -1,4 +1,5 @@
 ﻿using FinTech.API.Data;
+using FinTech.API.Enum;
 using FinTech.API.Models;
 using FinTech.API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +21,21 @@ namespace FinTech.API.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Transaction>> GetAllAsync()
+        public async Task<List<Transaction>> GetFilteredAsync(TransactionType? type, TransactionStatus? status)
         {
-            return await _context.Transactions.ToListAsync();
+            var query = _context.Transactions.AsQueryable();
+
+            if (type.HasValue)
+            {
+                query = query.Where(x => x.Type == type);
+            }
+
+            if (status.HasValue)
+            {
+                query = query.Where(x => x.Status == status);
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<Transaction?> GetByIdAsync(Guid id)
