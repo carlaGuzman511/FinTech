@@ -16,4 +16,4 @@ EXPOSE 8080
 
 ENV ASPNETCORE_URLS=http://+:8080
 
-ENTRYPOINT ["dotnet", "FinTech.Api.dll"]
+ENTRYPOINT ["dotnet", "FinTech.API.dll"]
