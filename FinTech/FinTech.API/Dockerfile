@@ -4,16 +4,20 @@ WORKDIR /src
 COPY . .
 
 RUN dotnet restore FinTech.API.csproj
-RUN dotnet publish FinTech.API.csproj -c Release -o /app/publish
+
+RUN dotnet publish FinTech.API.csproj \
+    -c Release \
+    -r linux-x64 \
+    --self-contained false \
+    -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
 COPY --from=build /app/publish .
 
-RUN ls -R .
-
 EXPOSE 8080
+
 ENV ASPNETCORE_URLS=http://+:8080
 
-ENTRYPOINT ["dotnet", "/app/FinTech.API.dll"]
+ENTRYPOINT ["dotnet", "FinTech.API.dll"]
