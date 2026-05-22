@@ -1,5 +1,5 @@
-using FinTech.API.DTOs.Loans;
-using FinTech.API.Services.Interfaces;
+using FinTech.Domain.DTOs.Loans;
+using FinTech.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinTech.API.Controllers

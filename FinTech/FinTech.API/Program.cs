@@ -1,10 +1,10 @@
-using FinTech.API.Data;
-using FinTech.API.Repositories.Implementations;
-using FinTech.API.Repositories.Interfaces;
-using FinTech.API.Services.Interfaces;
-using FinTech.API.Services;
+using FinTech.Infrastructure.Data;
+using FinTech.Application.Interfaces;
+using FinTech.Application.Services;
 using Microsoft.EntityFrameworkCore;
 using FinTech.API.Middlewares;
+using FinTech.Domain.Services.Interfaces;
+using FinTech.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

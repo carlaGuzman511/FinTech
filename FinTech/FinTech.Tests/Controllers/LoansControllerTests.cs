@@ -1,6 +1,6 @@
 ﻿using FinTech.API.Controllers;
-using FinTech.API.DTOs.Loans;
-using FinTech.API.Services.Interfaces;
+using FinTech.Domain.Services.Interfaces;
+using FinTech.Domain.DTOs.Loans;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

@@ -1,10 +1,10 @@
-﻿using FinTech.API.DTOs.Transactions;
-using FinTech.API.Enum;
-using FinTech.API.Models;
-using FinTech.API.Repositories.Interfaces;
-using FinTech.API.Services;
+﻿using FinTech.Domain.DTOs.Transactions;
+using FinTech.Domain.Enum;
+using FinTech.Domain.Models;
+using FinTech.Application.Services;
 using FluentAssertions;
 using Moq;
+using FinTech.Application.Interfaces;
 
 namespace FinTech.Tests.Services
 {

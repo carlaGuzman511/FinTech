@@ -1,14 +1,11 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
 
 import Card from "@/components/ui/Card";
 import EmptyState from "@/components/ui/EmptyState";
 
-import {
-  getTransactionById,
-} from "@/services/transactionService";
+import { useTransaction } from "@/hooks/useTransaction";
 
 import {
   TransactionType,
@@ -21,13 +18,11 @@ export default function TransactionDetailPage() {
   const params = useParams();
   const id = params?.id as string;
 
-  const { data, isLoading, error } =
-    useQuery({
-      queryKey: ["transaction", id],
-      queryFn: () =>
-        getTransactionById(id),
-      enabled: !!id,
-    });
+  const {
+    data,
+    isLoading,
+    error,
+  } = useTransaction(id);
 
   if (isLoading) {
     return <div>Loading...</div>;

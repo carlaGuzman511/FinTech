@@ -19,17 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-    <Folder Include="Fixtures\" />
-    <Folder Include="IntegrationTests\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FinTech.API\FinTech.API.csproj" />
+    <ProjectReference Include="..\FinTech.Application\FinTech.Application.csproj" />
+    <ProjectReference Include="..\FinTech.Domain\FinTech.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>

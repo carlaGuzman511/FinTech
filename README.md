@@ -64,7 +64,6 @@ https://fintech-api-686f.onrender.com/swagger/index.html
 - Tailwind CSS
 - Axios
 - React Hook Form
-- Zod
 
 ## Backend
 
@@ -121,6 +120,8 @@ src/
 Se implementó para desacoplar el acceso a datos y mejorar la mantenibilidad y testabilidad del sistema.
 
 2. Dependency Injection
+
+3. Chain of Responsability (Middleware)
 
 ## Funcionalidades Implementadas
 

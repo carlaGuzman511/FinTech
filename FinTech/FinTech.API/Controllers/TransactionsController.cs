@@ -1,6 +1,6 @@
-﻿using FinTech.API.DTOs.Transactions;
-using FinTech.API.Enum;
-using FinTech.API.Services.Interfaces;
+﻿using FinTech.Domain.Services.Interfaces;
+using FinTech.Domain.DTOs.Transactions;
+using FinTech.Domain.Enum;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinTech.API.Controllers

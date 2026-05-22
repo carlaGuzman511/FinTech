@@ -1,10 +1,10 @@
-using FinTech.API.DTOs.Loans;
-using FinTech.API.Repositories.Interfaces;
-using FinTech.API.Services;
-using FinTech.API.Services.Exceptions;
-using FinTech.API.Utils;
+using FinTech.Domain.DTOs.Loans;
+using FinTech.Application.Services;
+using FinTech.Application.Exceptions;
+using FinTech.Application;
 using FluentAssertions;
 using Moq;
+using FinTech.Application.Interfaces;
 
 namespace FinTech.Tests.Utils
 {

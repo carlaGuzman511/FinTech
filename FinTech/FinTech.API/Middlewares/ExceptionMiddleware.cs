@@ -1,4 +1,4 @@
-﻿using FinTech.API.Services.Exceptions;
+﻿using FinTech.Application.Exceptions;
 
 namespace FinTech.API.Middlewares
 {

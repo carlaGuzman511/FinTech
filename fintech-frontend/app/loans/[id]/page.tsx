@@ -1,7 +1,6 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
 
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
@@ -9,8 +8,8 @@ import EmptyState from "@/components/ui/EmptyState";
 
 import PaymentScheduleTable from "@/components/loans/PaymentScheduleTable";
 
-import { getLoanById, getLoanSchedule } from "@/services/loanService";
-
+import { useLoanSchedule } from "@/hooks/useLoanSchedule";
+import { useLoan } from "@/hooks/useLoan";
 import { LoanStatusLabel, LoanTypeLabel } from "@/types/loan";
 import { LoanStatus, LoanType } from "@/types/loan";
 import { useLoanActions } from "@/hooks/useLoanActions";
@@ -19,27 +18,18 @@ export default function LoanDetailPage() {
   const params = useParams();
   const id = params?.id as string;
 
-  const { 
-    data, 
-    isLoading, 
-    error 
-  } = useQuery({
-    queryKey: ["loan", id],
-    queryFn: () => getLoanById(id),
-    enabled: !!id,
-  });
+    const {
+    data,
+    isLoading,
+    error,
+  } = useLoan(id);
 
   const {
     data: schedule,
     isLoading: scheduleLoading,
-    error: scheduleError
-  } = useQuery({
-    queryKey: ["loan-schedule", id],
-    queryFn: () =>
-      getLoanSchedule(id),
-    enabled: !!id,
-  });
-  
+    error: scheduleError,
+  } = useLoanSchedule(id);
+
   const {
     approveMutation,
     rejectMutation,
