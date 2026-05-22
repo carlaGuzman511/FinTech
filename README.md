@@ -29,9 +29,30 @@ https://fintech-api-686f.onrender.com/swagger/index.html
 
 ## Simulador de préstamos
 
+![alt text](images/simulator1.png)
+
+![alt text](images/simulator2.png)
+
 ## Lista de préstamos
 
+![alt text](images/loans1.png)
+
+## Detalles del prestamo
+
+![alt text](images/loans2.png)
 ---
+
+## Lista de Transactions
+
+![alt text](images/transactions1.png)
+
+## Crear Transaction
+
+![alt text](images/transactions2.png)
+
+## Detalles de la transaction
+
+![alt text](images/transaction3.png)
 
 # Tecnologías Utilizadas
 
