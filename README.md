@@ -52,7 +52,7 @@ https://fintech-api-686f.onrender.com/swagger/index.html
 
 ## Detalles de la transaction
 
-![alt text](images/transaction3.png)
+![alt text](images/transactions3.png)
 
 # Tecnologías Utilizadas
 
